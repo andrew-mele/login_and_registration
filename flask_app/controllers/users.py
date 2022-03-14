@@ -26,6 +26,7 @@ def register():
 @app.route('/login', methods=['POST'])
 def login_user():
     user = User.get_email(request.form)
+    
     if not User.valid(request.form):
         flash('Invalid Email. Please try again or register an account.','login')
         return redirect('/')
@@ -39,7 +40,7 @@ def login_user():
 @app.route ('/dashboard')
 def dash():
     if 'user_id' not in session:
-        return redirect('logout')
+        return redirect('/logout')
     data = {
         'id' : session['user_id']
     }
